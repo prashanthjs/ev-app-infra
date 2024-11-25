@@ -33,4 +33,4 @@ jobs:
         run: terraform init -backend-config=./tfvars/backend.${{ github.event.inputs.environment }}.tfvars
 
       - name: Destroy
-        run: terraform destroy -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{ github.event.inputs.environment }}.tfvars
+        run: terraform destroy -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{ github.event.inputs.environment }}.tfvars -backend-config=./tfvars/backend.${{ github.event.inputs.environment }}.tfvars

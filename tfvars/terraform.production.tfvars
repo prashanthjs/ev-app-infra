@@ -1,14 +1,14 @@
 region = "us-east-1"
 environment = "prod"
 
-vpc_name = "ev-app-infra-vpc"
+vpc_name = "ev-pro-app-infra-vpc"
 vpc_cidr = "11.0.0.0/16"
 vpc_azs = ["us-east-1a", "us-east-1b", "us-east-1c"]
 vpc_private_subnets = ["11.0.101.0/24", "11.0.102.0/24", "11.0.103.0/24"]
 vpc_public_subnets = ["11.0.1.0/24", "11.0.2.0/24", "11.0.3.0/24"]
 vpc_intra_subnets = ["11.0.123.0/24", "11.0.124.0/24", "11.0.125.0/24"]
 
-eks_name = "ev-app-eks-cluster"
+eks_name = "ev-pro-app-eks-cluster"
 eks_version = "1.31"
 eks_endpoint_public_access = true
 eks_endpoint_private_access = true

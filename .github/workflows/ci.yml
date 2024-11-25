@@ -45,6 +45,7 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     needs: [Validate]
+    if: github.ref == 'refs/heads/main'
     strategy:
       matrix:
         environment: [development, production]
@@ -74,8 +75,8 @@ jobs:
         run: terraform validate
 
       - name: Plan Terraform
-        run: terraform plan -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
+        run: terraform plan -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars -backend-config=./tfvars/backend.${{matrix.environment}}.tfvars
 
       - name: Apply Terraform
-        run: terraform apply -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
+        run: terraform apply -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars -backend-config=./tfvars/backend.${{matrix.environment}}.tfvars
       
