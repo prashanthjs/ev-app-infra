@@ -76,6 +76,6 @@ jobs:
       - name: Plan Terraform
         run: terraform plan -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
 
-#      - name: Apply Terraform
-#        run: terraform apply -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
+      - name: Apply Terraform
+        run: terraform apply -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
       
