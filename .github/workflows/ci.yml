@@ -24,6 +24,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -48,20 +55,27 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.9.0
 
-      - name: Initialize Terraform
+      - name: Initialise Terraform
         run: terraform init -backend-config=./tfvars/backend.${{matrix.environment}}.tfvars
 
       - name: Validate Terraform
         run: terraform validate
 
       - name: Plan Terraform
-        run: terraform plan -var-file=terraform.tfvars -var-file=terraform.${{matrix.environment}}.tfvars
+        run: terraform plan -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
 
-      - name: Apply Terraform
-        run: terraform apply -var-file=terraform.tfvars -var-file=terraform.${{matrix.environment}}.tfvars
+#      - name: Apply Terraform
+#        run: terraform apply -auto-approve -var-file=./tfvars/terraform.tfvars -var-file=./tfvars/terraform.${{matrix.environment}}.tfvars
       
